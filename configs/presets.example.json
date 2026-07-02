@@ -1,0 +1,5 @@
+[
+  {"name": "Mimo", "url": "https://your-proxy.com/v1", "key": "YOUR_KEY", "model": "mimo-v2.5-pro", "jb": "Mimo专用（已验证）"},
+  {"name": "Grok", "url": "https://your-grok-proxy.com/v1", "key": "YOUR_KEY", "model": "grok-4.3-fast", "jb": "无 (Grok原生)"},
+  {"name": "DeepSeek (opencode)", "url": "https://opencode.ai/zen/go/v1", "key": "YOUR_KEY", "model": "deepseek-v4-pro", "jb": "DeepSeek V4压力测试"}
+]

@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.pyc
+.pytest_cache/
+
+# Environment
+.env
+.venv/
+venv/
+
+# Secrets (CRITICAL - never commit)
+configs/presets.json
+configs/jailbreaks.json
+config/
+*.key
+*.pem
+
+# Output data (large files)
+output/*.jsonl
+output/*.json
+output/*.checkpoint
+output/*.md
+output/archive/
+
+# Test/temp scripts (moved to scripts/)
+test_mimo_*.py
+optimize_*.py
+fix_json_output.py
+merge_and_validate.py
+clean_data.py
+nsfw_dataset.py
+generate_batch.py
+generate_final_samples.py
+generate_missing_types.py
+
+# Legacy scripts
+_gen_mimo.py
+_gen_magpie.py
+update_jb.py
+
+# IDE
+.vscode/
+.idea/
+.cursor/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docs internal
+docs/superpowers/
+
+# Config files with potential API keys
+config/
+configs/*.yaml
+configs/*.json
+!configs/*.example.json
+
+# Scripts with potential API keys
+scripts/generate_*.py
+scripts/fix_*.py
+scripts/merge_*.py
+scripts/clean_*.py
+scripts/nsfw_*.py
+scripts/legacy/generate_nsfw.py
+scripts/tests/
+
+# Legacy scripts with API keys
+scripts/legacy/
