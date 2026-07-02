@@ -60,6 +60,7 @@ config/
 configs/*.yaml
 configs/*.json
 !configs/*.example.json
+!configs/*.example.yaml
 
 # Scripts with potential API keys
 scripts/generate_*.py

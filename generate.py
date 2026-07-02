@@ -27,7 +27,7 @@ import re
 import sys
 import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import httpx
 import yaml
@@ -76,7 +76,7 @@ def load_config(path: str) -> dict:
 # Response parser (XML + JSON, robust)
 # ============================================================
 
-def parse_response(raw: str) -> dict | None:
+def parse_response(raw: str) -> Optional[dict]:
     """Extract structured data from LLM response. XML first, then JSON."""
     if not raw:
         return None
@@ -119,7 +119,7 @@ def parse_response(raw: str) -> dict | None:
     return None
 
 
-def _xml_tag(text: str, tag: str) -> str | None:
+def _xml_tag(text: str, tag: str) -> Optional[str]:
     m = re.search(rf"<{tag}>\s*(.*?)\s*</{tag}>", text, re.DOTALL)
     return m.group(1).strip() if m else None
 
@@ -335,7 +335,7 @@ class PoolGenerator:
                        ensure_ascii=False), encoding="utf-8")
 
     async def _make_request(self, messages: list[dict],
-                            client: httpx.AsyncClient) -> tuple[str | None, str | None]:
+                            client: httpx.AsyncClient) -> tuple:
         """Make one API call. Returns (content, error_text)."""
         try:
             resp = await client.post(self.api_url, headers={
@@ -358,7 +358,7 @@ class PoolGenerator:
         return data["choices"][0]["message"]["content"], None
 
     async def _generate_one(self, client: httpx.AsyncClient,
-                            sem: asyncio.Semaphore) -> dict | None:
+                            sem: asyncio.Semaphore) -> Optional[dict]:
         """Full pipeline: prompt → API → parse → format → quality."""
         prompt = self.prompts.build()
         messages = self._build_messages(prompt["system"], prompt["user"])
@@ -499,7 +499,7 @@ class PoolGenerator:
     def _print_progress(self, target: int):
         """Print progress line (overwrites previous)."""
         elapsed = max(time.time() - self.start_time, 0.1)
-        rate = (self.done - self.load_checkpoint()) / elapsed if hasattr(self, '_last_checkpoint') else 0
+        rate = self.done / elapsed if elapsed > 0 else 0
         eta = (target - self.done) / max(rate, 0.01)
         pct = 100 * self.done / target
         # Simple inline progress
@@ -554,7 +554,7 @@ async def main():
         return
 
     # Default config if none specified
-    configs = args.config if args.config else ["configs/nsfw_grok.yaml"]
+    configs = args.config if args.config else ["configs/default.yaml"]
 
     for config_path in configs:
         if not Path(config_path).exists():

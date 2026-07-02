@@ -1,114 +1,111 @@
 # Create Datasets
 
-一个用于生成 SFT/DPO 训练数据的框架，专门针对中文 LLM 微调场景。
+A framework for generating SFT/DPO training data, designed for Chinese LLM fine-tuning scenarios.
 
-## 🎯 项目特点
+## Features
 
-- **多模型支持**：Mimo、Grok、DeepSeek 等多个 LLM API
-- **高并发生成**：支持 30 并发，~7 条/秒
-- **断点续传**：自动生成 checkpoint，中断后可继续
-- **质量控制**：自动过滤低质量样本、去重
-- **Web UI**：基于 Gradio 的可视化界面
-- **多种数据类型**：NSFW、通用对话、脏话、自然聊天等
+- **Multi-model support**: Mimo, Grok, DeepSeek, and other OpenAI-compatible APIs
+- **High concurrency**: Up to 30 concurrent requests, ~7 samples/second
+- **Checkpoint resume**: Automatic checkpoint saving, resume from interruption
+- **Quality control**: Auto-filter low-quality samples, deduplication
+- **Web UI**: Gradio-based visual interface
+- **Multiple data types**: Configurable templates with weighted sampling
 
-## 📁 项目结构
+## Project Structure
 
 ```
-├── generate.py          # 主生成脚本
-├── webui.py             # Web 界面
-├── configs/             # 配置文件（需要自己创建）
-│   └── *.example.json   # 示例配置
-├── src/                 # 核心模块
+├── generate.py          # Main generation script
+├── webui.py             # Web interface
+├── configs/             # Configuration files (create your own)
+│   └── *.example.json   # Example configurations
+├── src/                 # Core modules
 │   ├── config_loader.py
 │   ├── prompt_manager.py
 │   ├── generator.py
 │   ├── llm_client.py
 │   └── ...
-├── output/              # 生成的数据（gitignore）
-├── scripts/             # 辅助脚本
-│   ├── tests/           # 测试脚本
-│   └── legacy/          # 遗留脚本
-├── docs/                # 文档
-└── .env.example         # 环境变量示例
+├── output/              # Generated data (gitignored)
+├── docs/                # Documentation
+└── .env.example         # Environment variables template
 ```
 
-## 🚀 快速开始
+## Quick Start
 
-### 1. 安装依赖
+### 1. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. 配置 API
+### 2. Configure API
 
-复制 `.env.example` 为 `.env`，填入你的 API key：
+Copy `.env.example` to `.env` and fill in your API keys:
 
 ```bash
 cp .env.example .env
-# 编辑 .env 填入你的真实 API key
+# Edit .env with your real API keys
 ```
 
-### 3. Web UI（推荐）
+### 3. Web UI (Recommended)
 
 ```bash
 python webui.py
-# 浏览器打开 http://127.0.0.1:7860
+# Open http://127.0.0.1:7860 in browser
 ```
 
-### 4. CLI 模式
+### 4. CLI Mode
 
 ```bash
-# 列出可用配置
+# List available configs
 python generate.py --list
 
-# 运行生成
-python generate.py --config configs/nsfw_mimo.yaml
+# Run generation
+python generate.py --config configs/my_config.yaml
 
-# 自定义目标数量
-python generate.py --config configs/nsfw_mimo.yaml --target 500
+# Custom target count
+python generate.py --config configs/my_config.yaml --target 500
 
-# 测试模式（不调用 API）
-python generate.py --config configs/nsfw_mimo.yaml --dry-run --target 5
+# Test mode (no API calls)
+python generate.py --config configs/my_config.yaml --dry-run --target 5
 ```
 
-## 📊 数据集格式
+## Data Format
 
-### SFT 格式（推荐）
+### SFT Format (Recommended)
 
 ```json
 {
-  "instruction": "用户的问题或指令",
-  "input": "可选的额外输入",
-  "output": "模型的回复",
-  "system": "系统提示（可选）",
+  "instruction": "User question or instruction",
+  "input": "Optional additional input",
+  "output": "Model response",
+  "system": "System prompt (optional)",
   "history": []
 }
 ```
 
-### DPO 格式
+### DPO Format
 
 ```json
 {
-  "system": "系统提示",
-  "instruction": "用户指令",
+  "system": "System prompt",
+  "instruction": "User instruction",
   "input": "",
-  "chosen": "偏好的回复",
-  "rejected": "不偏好的回复"
+  "chosen": "Preferred response",
+  "rejected": "Non-preferred response"
 }
 ```
 
-## 🔧 配置文件
+## Configuration
 
-配置文件位于 `configs/*.yaml`，格式如下：
+Configuration files are located in `configs/*.yaml`. Format:
 
 ```yaml
 name: my_pool
-description: "数据池描述"
+description: "Data pool description"
 
 api:
   base_url: "https://api.example.com/v1"
-  key: "YOUR_API_KEY"  # 或使用环境变量
+  key: "YOUR_API_KEY"  # Or use environment variables
   model: "model-name"
 
 generation:
@@ -125,85 +122,42 @@ generation:
 
 jailbreak:
   enabled: true
-  system_prompt: "破限提示词..."
-  fake_assistant_reply: "好的回复..."
+  system_prompt: "Your jailbreak prompt..."
+  fake_assistant_reply: "Assistant reply..."
 
 templates:
   - name: template1
     weight: 50
-    system: "系统提示"
-    user: "用户提示 {variable}"
+    system: "System prompt"
+    user: "User prompt with {variable}"
     seeds:
-      variable: ["选项1", "选项2"]
+      variable: ["option1", "option2"]
 ```
 
-## 📈 输出文件
+## Output Files
 
-每个配置生成 3 个文件：
+Each configuration generates 3 files:
 
-| 文件 | 说明 |
-|------|------|
-| `output/<name>.jsonl` | 有效数据（每行一条） |
-| `output/<name>_failures.jsonl` | 失败样本 |
-| `output/<name>.checkpoint` | 断点文件 |
+| File | Description |
+|------|-------------|
+| `output/<name>.jsonl` | Valid samples (one per line) |
+| `output/<name>_failures.jsonl` | Failed attempts |
+| `output/<name>.checkpoint` | Checkpoint file |
 
-## 🎓 训练建议
+## Security
 
-### Qwen3-3B 微调（推荐入门）
+- **API Keys**: Managed via environment variables or local config files, never committed to git
+- **Output Data**: Generated data files are in `.gitignore`
+- **Config Files**: `configs/` directory is in `.gitignore`
 
-```
-模型: Qwen3-3B-Instruct
-显卡: RTX 4090 24GB
-方法: QLoRA (4-bit)
-VRAM: ~6GB
-数据: 2000-3000 条
-训练时间: 1-2 小时
-```
+## Documentation
 
-### Qwen3-14B 微调（推荐进阶）
+- [Jailbreak Guide](docs/jailbreak_guide.md) - Mimo jailbreak experience and best practices
 
-```
-模型: Qwen3-14B-Instruct
-显卡: RTX 4090 24GB 或 5090 32GB
-方法: QLoRA (4-bit)
-VRAM: ~12GB
-数据: 3000-5000 条
-训练时间: 3-6 小时
-```
-
-## 🔐 安全说明
-
-- **API Key**：所有 API key 通过环境变量或本地配置文件管理，不会提交到 git
-- **输出数据**：生成的数据文件在 `.gitignore` 中，不会自动上传
-- **配置文件**：`configs/` 目录在 `.gitignore` 中
-
-## 📚 文档
-
-- [破限指南](docs/jailbreak_guide.md) — Mimo 破限经验和最佳实践
-- [模型对比](MODEL_COMPARISON.md) — DeepSeek、Grok、Mimo 对比
-- [数据集管理](scripts/merge_and_validate.py) — 数据清洗和合并工具
-
-## 🛠️ 辅助脚本
-
-```bash
-# 数据集管理
-python scripts/merge_and_validate.py    # 合并和验证数据
-python scripts/clean_data.py            # 清洗数据
-python scripts/nsfw_dataset.py          # NSFW 数据分类和抽取
-
-# 测试
-python scripts/tests/test_mimo_quick.py # 快速测试 Mimo
-```
-
-## 📝 更新日志
-
-- **2026-07-02**: 数据集清洗完成，支持 Qwen3 微调
-- **2026-07-01**: 初始版本，支持多模型生成
-
-## 📄 许可证
+## License
 
 MIT License
 
-## ⚠️ 免责声明
+## Disclaimer
 
-本项目仅用于研究和学习目的。生成的数据内容由 AI 模型产生，不代表开发者立场。使用者应遵守当地法律法规，对使用本项目产生的任何后果自行承担责任。
+This project is for research and educational purposes only. Generated content is produced by AI models and does not represent the developer's views. Users should comply with local laws and regulations.

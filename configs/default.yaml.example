@@ -1,0 +1,35 @@
+# Default configuration example
+# Copy this file and modify for your needs
+
+name: default
+description: "Default data generation pool"
+
+api:
+  base_url: "https://api.example.com/v1"
+  key: "YOUR_API_KEY"
+  model: "model-name"
+
+generation:
+  mode: sft
+  format: llamafactory
+  target: 1000
+  max_concurrent: 10
+  max_tokens: 2048
+  temperature: 0.9
+  batch_size: 10
+  output_dir: "output"
+  output_name: "default"
+  seed: 42
+  resume: true
+
+jailbreak:
+  enabled: false
+  system_prompt: ""
+  fake_assistant_reply: ""
+
+templates:
+  - name: default_template
+    weight: 100
+    system: ""
+    user: "请生成一条训练数据。\n\n<instruction>用户的问题或请求</instruction>\n<input></input>\n<output>详细的回答内容</output>"
+    seeds: {}
