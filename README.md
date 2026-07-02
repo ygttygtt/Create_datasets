@@ -1,6 +1,22 @@
 # Create Datasets
 
-A framework for generating SFT/DPO training data, designed for Chinese LLM fine-tuning scenarios.
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/Release-v1.0.0-blue?style=for-the-badge" alt="Release">
+</p>
+
+<p align="center">
+  <b>LLM Training Data Generation Framework</b><br>
+  Multi-model concurrent generation, checkpoint resume, Web UI
+</p>
+
+<p align="center">
+  <a href="README_CN.md">中文文档</a>
+</p>
+
+---
 
 ## Features
 

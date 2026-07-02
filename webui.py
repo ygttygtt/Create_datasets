@@ -41,20 +41,20 @@ _save(JB_FILE, _load(JB_FILE, _DEFAULT_JBS))
 # Templates
 # ============================================================
 TEMPLATES = {
-    "mature":   ("Mature Female Seduction","Scene: {a}  Character: {b}  Style: {c}",
-                 {"a":["Neighbor in sleepwear borrowing things","Female boss invites me after overtime","Gym cougar picks me up","Roommate in towel after shower","Tutor in low-cut top teaching"],"b":["30yo busty neighbor","35yo divorced woman","28yo career woman D-cup","32yo gentle sister","38yo sexy landlady"],"c":["Detailed sensory","First person","Explicit","Romantic erotic"]}),
-    "dominant": ("Male Dominant Sex","Scene: {a}  Position: {b}  Style: {c}",
-                 {"a":["Bent over desk","Against window","Hands tied to bedpost","From behind whispering dirty talk","On her knees oral","Pinned against bathroom wall"],"b":["Doggy","Missionary","Standing","Side","69"],"c":["Explicit","With plot","First person","Rough pleasure"]}),
-    "dialogue": ("Erotic Dialogue (Multi-round)","Scene: {a}  Style: {b}  Relationship: {c}  At least 6 rounds, increasingly explicit",
-                 {"a":["Late night sexting","Under table at restaurant","Phone sex","Drunk truth-telling","First date flirtation"],"b":["Explicit","Subtle teasing","One-sided seduction","Rough direct"],"c":["New couple","Flirting coworkers","Old lovers","FWB"]}),
-    "story":    ("Erotic Story (Long)","Type: {a}  Female lead: {b}  Style: {c}  500+ words with plot",
-                 {"a":["Office affair","Older woman younger man","Gym encounter","Business trip passion","Neighbor secret","Teacher student taboo"],"b":["32yo female director D-cup","28yo yoga instructor","35yo divorced woman","30yo flight attendant","27yo busty teacher","33yo female doctor"],"c":["Literary","First person","Dialogue-heavy","Slow burn psychology","Explicit adult literature"]}),
-    "bdsm":     ("BDSM/Fetish","玩法: {a}  Scene: {b}  Style: {c}",
-                 {"a":["Bondage sensory deprivation","Spanking discipline","Master pet play","Stockings foot fetish","Uniform seduction","Mild exhibitionism"],"b":["Private space","Hotel roleplay","After work office","Weekend at home"],"c":["Domination submission","Shame excitement","Explicit action","Slow burn psychology"]}),
-    "insult1":  ("Gaming Trash Talk","Game: {a}  Reason: {b}  Style: {c}",{"a":["Honor of Kings","LOL","CSGO","DOTA2"],"b":["Teammate stealing position and feeding","Opponent hacking and taunting","AFK feeding"],"c":["Blunt vulgar","Sarcastic","Dialect profanity"]}),
-    "insult2":  ("Real Life Argument","Scene: {a}  Cause: {b}  Intensity: {c}",{"a":["Traffic accident","Market","Parking spot","Subway conflict"],"b":["Physical push","Verbal provocation","Misunderstanding","Alcohol-fueled"],"c":["Heated cursing","Escalating threats","Extreme anger"]}),
-    "general1": ("Knowledge Q&A","Field: {a}  Type: {b}  Difficulty: {c}",{"a":["History","Physics","Biology","Economics","Computer Science","Psychology"],"b":["Concept explanation","Causal analysis","Comparison"],"c":["Beginner","Intermediate","Advanced"]}),
-    "general2": ("Practical Guide","Field: {a}  Type: {b}",{"a":["Career development","Finance","Health","Relationships","Learning methods"],"b":["Step-by-step tutorial","Pitfall guide","Comparison review"]}),
+    "mature":   ("成熟女性诱惑","场景：{a}  角色：{b}  风格：{c}",
+                 {"a":["邻居少妇穿睡衣借东西","女上司加班后约我","健身房丰满熟女搭讪","合租姐姐裹浴巾","家教穿低胸装上课"],"b":["30岁巨乳女邻居","35岁离异少妇","28岁职场女强人","32岁温柔姐姐","38岁性感女房东"],"c":["细腻感官","第一人称","直白露骨","浪漫色情"]}),
+    "dominant": ("男性主导性爱","场景：{a}  体位：{b}  风格：{c}",
+                 {"a":["按办公桌上后入","落地窗前扶着玻璃","双手绑床头","背后抱住在耳边说骚话","她跪着口交","浴室顶在墙上"],"b":["后入式","传教士","站立式","侧入式","69式"],"c":["直白露骨","带剧情","第一人称","粗暴享受"]}),
+    "dialogue": ("色情对话(多轮)","场景：{a}  风格：{b}  关系：{c}  至少6轮，越来越露骨",
+                 {"a":["深夜微信发骚","餐厅桌下动作","phone sex","酒后吐真言","初次约会暧昧"],"b":["直白露骨","暧昧含蓄","一方挑逗","粗暴直接"],"c":["刚在一起","暧昧同事","老情人","炮友"]}),
+    "story":    ("情色小说(长文)","类型：{a}  女主：{b}  文风：{c}  500字以上有情节日片段",
+                 {"a":["职场偷情","姐弟恋第一次","健身房艳遇","出差激情","邻居秘密","师生禁忌"],"b":["32岁女总监D杯","28岁瑜伽教练","35岁离异少妇","30岁空姐","27岁巨乳教师","33岁女医生"],"c":["细腻文学","第一人称","对话描写并重","慢热心理","直白成人文学"]}),
+    "bdsm":     ("BDSM/癖好","玩法：{a}  场景：{b}  风格：{c}",
+                 {"a":["捆绑感官剥夺","打屁股管教","主人宠物扮演","丝袜恋足","制服诱惑","轻度露出"],"b":["私人空间","酒店角色扮演","下班后办公室","周末在家"],"c":["支配臣服","羞耻兴奋","直白动作","慢热心理"]}),
+    "insult1":  ("网游对喷","游戏：{a}  原因：{b}  风格：{c}",{"a":["王者荣耀","LOL","CSGO","DOTA2"],"b":["队友抢位还烂","对方开挂嘲讽","挂机送人头"],"c":["直白粗俗","阴阳怪气","方言脏话"]}),
+    "insult2":  ("现实吵架","场景：{a}  起因：{b}  激烈度：{c}",{"a":["交通事故","菜市场","停车位","地铁冲突"],"b":["动手推搡","嘴贱挑衅","误会引发","酒精失控"],"c":["激烈对骂","升级威胁","极度愤怒"]}),
+    "general1": ("知识问答","领域：{a}  类型：{b}  难度：{c}",{"a":["历史","物理","生物","经济","计算机","心理"],"b":["概念解释","因果分析","对比比较"],"c":["入门","中等","较难"]}),
+    "general2": ("实用指南","领域：{a}  类型：{b}",{"a":["职场发展","理财投资","健康养生","人际关系","学习方法"],"b":["步骤教程","避坑指南","对比推荐"]}),
 }
 
 # ============================================================
